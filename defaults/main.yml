@@ -1,21 +1,14 @@
 ---
 
-# Which clock management daemon should be installed?
-# Supported:
-# * ntpdate
-# * ntpd
-# * openntpd
-# Set to False to disable clock management
-ntp_daemon: 'openntpd'
+# Which clock management daemon should be installed? Currently only
+# 'ntpd' are supported. Set to False to disable clock management
+ntp_daemon: 'ntpd'
 
 # Timezone configuration
-# Specify timezone as 'Area/Zone', use 'timedatectl list-timezones' to see list of
-# possible values. To set the UTC timezone, specify it as 'Etc/UTC'
 # If this variable is empty or False, the timezone won't be changed
-ntp_timezone: ''
+ntp_timezone: 'Asia/Shanghai'
 
-# List of interfaces ntpd should listen on. Specify '*' to listen on all
-# interfaces.
+# List of interfaces ntpd should listen on. Specify '*' to listen on all interfaces.
 ntp_listen: []
 
 # Enable or disable access to ntpd service through firewall
@@ -29,7 +22,7 @@ ntp_allow: []
 
 # List of NTP servers to synchronize with
 # If you use NTPd, you can add server options in server strings, for example:
-#   '0.debian.pool.ntp.org iburst minpoll 6 maxpoll 10'
+#   '0.centos.pool.ntp.org iburst minpoll 6 maxpoll 10'
 # If you're syncing against local servers, recommended options are --
 # 'burst iburst minpoll 4 maxpoll 4', where:
 #  - 'burst' and 'iburst' -- Get a time sync as fast as possible by sending 8 sync
@@ -43,19 +36,12 @@ ntp_allow: []
 #                         6 -- 64 seconds
 #                        and so on.
 ntp_servers:
-  - '0.debian.pool.ntp.org'
-  - '1.debian.pool.ntp.org'
-  - '2.debian.pool.ntp.org'
-  - '3.debian.pool.ntp.org'
+  - '0.centos.pool.ntp.org'
+  - '1.centos.pool.ntp.org'
+  - '2.centos.pool.ntp.org'
+  - '3.centos.pool.ntp.org'
 
 # NTPd specific.
 # Fudge local clock if time servers is not available
 ntp_fudge: True
-
-# List of global root flags to check
-ntp_root_flags:
-
-  # If these flags are present, ignore status of "cap_sys_time" capability and
-  # install specified ntp daemon
-  cap_sys_time: [ 'ignore-cap12s', 'ignore-cap_sys_time' ]
 

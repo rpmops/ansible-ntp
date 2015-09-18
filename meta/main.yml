@@ -1,45 +1,17 @@
 ---
 
-dependencies:
-
-  - role: debops.ferm
-    tags: [ 'depend::ferm', 'depend::ferm:ntp', 'depend-of::ntp', 'type::dependency' ]
-    when: ntp_daemon in ['openntpd', 'ntpd']
-    ferm_input_list:
-
-      - type: 'dport_accept'
-        dport: [ 'ntp' ]
-        protocol: [ 'udp' ]
-        saddr: '{{ ntp_allow }}'
-        filename: 'ntp_dependency_accept'
-        weight: '50'
-        enabled: '{{ ntp_firewall_access }}'
-
-      - type: 'dport_limit'
-        dport: [ 'ntp' ]
-        protocol: [ 'udp' ]
-        filename: 'ntp_dependency_limit'
-        weight: '50'
-        enabled: '{{ ntp_firewall_access }}'
+dependencies: []
 
 galaxy_info:
   author: 'Maciej Delmanowski, Robin Schneider'
   description: 'Manage time synchronization, NTP server and timezone'
-  company: 'DebOps'
+  company: 'RpmOps'
   license: 'GNU General Public License v3'
   min_ansible_version: '1.7.0'
   platforms:
-  - name: Ubuntu
+  - name: EL
     versions:
-    - precise
-    - quantal
-    - raring
-    - saucy
-    - trusty
-  - name: Debian
-    versions:
-    - wheezy
-    - jessie
+    - 6
   categories:
   - system
 
