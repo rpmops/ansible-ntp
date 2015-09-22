@@ -1,6 +1,10 @@
 # {{ ansible_managed }}
 
+# Record different time between NTP server and NTP server of up-level to the file.
 driftfile /var/lib/ntp/drift
+
+# Log file
+logfile /var/log/ntp.log
 
 # Enable this if you want statistics to be logged.
 statsdir /var/log/ntpstats/
