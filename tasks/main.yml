@@ -5,6 +5,7 @@
     name: '{{ item }}'
     state: 'latest'
   with_items: [ 'tzdata','ntp' ]
+  when: ntp_daemon is defined and ntp_daemon in [ 'ntpd' ]
 
 - name: Configure timezone in /etc/sysconfig/clock
   copy:
